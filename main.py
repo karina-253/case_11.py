@@ -90,21 +90,20 @@ def draw_tree(depth: int, size: float, angle: float) -> None:
         None: The function only draws branches.
     """
 
-    if depth == 0:
-        return
-
     colormode(255)
     green_component = 255 - int(depth * (250 / 6)) % 255
     color(0, green_component, 0)
 
-    forward(size)
+    if depth == 0:
+        forward(size)
+        backward(size)
+        return
 
+    forward(size)
     right(angle)
     draw_tree(depth - 1, size / 2, angle)
-
     left(angle * 2)
     draw_tree(depth - 1, size / 2, angle)
-
     right(angle)
     backward(size)
 
